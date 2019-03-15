@@ -5,7 +5,7 @@ import { StaticQuery, graphql } from 'gatsby';
 import 'modern-normalize';
 import '../styles/normalize';
 
-import Header from '../components/Header';
+import Header from '../components/gatsbyComponents/Header';
 import LayoutRoot from '../components/gatsbyComponents/LayoutRoot';
 import LayoutMain from '../components/gatsbyComponents/LayoutMain';
 
