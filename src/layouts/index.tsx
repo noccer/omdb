@@ -4,10 +4,12 @@ import { StaticQuery, graphql } from 'gatsby';
 
 import 'modern-normalize';
 import '../styles/normalize';
+import '../styles/material-components-web.min.css';
 
 import Header from '../components/gatsbyComponents/Header';
 import LayoutRoot from '../components/gatsbyComponents/LayoutRoot';
 import LayoutMain from '../components/gatsbyComponents/LayoutMain';
+import AppBar from '../components/AppBar/AppBar';
 
 type StaticQueryProps = {
     site: {
@@ -47,7 +49,8 @@ const IndexLayout: React.SFC = ({ children }) => (
                         rel="stylesheet"
                     />
                 </Helmet>
-                <Header title={data.site.siteMetadata.title} />
+                {/* <Header title={data.site.siteMetadata.title} /> */}
+                <AppBar title={data.site.siteMetadata.title} short={true} />
                 <LayoutMain>{children}</LayoutMain>
             </LayoutRoot>
         )}
