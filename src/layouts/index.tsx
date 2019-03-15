@@ -41,7 +41,12 @@ const IndexLayout: React.SFC = ({ children }) => (
                             content: 'gatsbyjs, gatsby, javascript, sample, something',
                         },
                     ]}
-                />
+                >
+                    <link
+                        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                        rel="stylesheet"
+                    />
+                </Helmet>
                 <Header title={data.site.siteMetadata.title} />
                 <LayoutMain>{children}</LayoutMain>
             </LayoutRoot>
