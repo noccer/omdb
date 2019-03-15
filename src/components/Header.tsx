@@ -4,7 +4,7 @@ import { transparentize } from 'polished'
 import { Link } from 'gatsby'
 
 import { heights, dimensions, colors } from '../styles/variables'
-import Container from './Container'
+import Container from './gatsbyComponents/Container'
 
 const StyledHeader = styled.header`
   height: ${heights.header}px;
