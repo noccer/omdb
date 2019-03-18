@@ -31,10 +31,10 @@ export default class AppBar extends React.PureComponent<AppBarProps, AppBarState
                 <TopAppBar short={short}>
                     <TopAppBarRow>
                         <TopAppBarSection alignStart>
-                            <TopAppBarNavigationIcon icon="menu" />
+                            {/* <TopAppBarNavigationIcon icon="menu" /> */}
                             <TopAppBarTitle>{title}</TopAppBarTitle>
                         </TopAppBarSection>
-                        <TopAppBarSection alignEnd>
+                        {/* <TopAppBarSection alignEnd>
                             <TopAppBarActionItem
                                 aria-label="Download"
                                 alt="Download"
@@ -50,7 +50,7 @@ export default class AppBar extends React.PureComponent<AppBarProps, AppBarState
                                 alt="Bookmark this page"
                                 icon="bookmark"
                             />
-                        </TopAppBarSection>
+                        </TopAppBarSection> */}
                     </TopAppBarRow>
                 </TopAppBar>
                 <TopAppBarFixedAdjust short={short} />
