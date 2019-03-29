@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as store from 'store2';
 
-import Page from '../components/gatsbyComponents/Page';
-import Container from '../components/gatsbyComponents/Container';
+import Page from '../components/_gatsbyComponents/Page';
+import Container from '../components/_gatsbyComponents/Container';
 import IndexLayout from '../layouts';
 import ApiModal from '../components/ApiModal/ApiModal';
 import { Button } from '@rmwc/button';

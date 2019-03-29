@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { graphql } from 'gatsby';
 
-import Page from '../components/gatsbyComponents/Page';
-import Container from '../components/gatsbyComponents/Container';
+import Page from '../components/_gatsbyComponents/Page';
+import Container from '../components/_gatsbyComponents/Container';
 import IndexLayout from '../layouts';
 
 interface PageTemplateProps {

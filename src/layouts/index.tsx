@@ -4,11 +4,11 @@ import { StaticQuery, graphql } from 'gatsby';
 
 import 'modern-normalize';
 import '../styles/normalize';
-import '../styles/material-components-web.css';
+import '../styles/material-components-web.min.css';
 
-import Header from '../components/gatsbyComponents/Header';
-import LayoutRoot from '../components/gatsbyComponents/LayoutRoot';
-import LayoutMain from '../components/gatsbyComponents/LayoutMain';
+import Header from '../components/_gatsbyComponents/Header';
+import LayoutRoot from '../components/_gatsbyComponents/LayoutRoot';
+import LayoutMain from '../components/_gatsbyComponents/LayoutMain';
 import AppBar from '../components/AppBar/AppBar';
 import ContextProvider from '../context/AppContext';
 

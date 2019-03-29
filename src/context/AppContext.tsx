@@ -19,14 +19,6 @@ export interface ContextActions {
     onClearAllFavourites: () => void;
 }
 
-// const actions: ContextActions = {
-//     onAddFavourite: () => {
-//         debugger;
-//     },
-//     onRemoveFavourite: () => {},
-//     onClearAllFavourites: () => {},
-// };
-
 export const Context = React.createContext({});
 
 export interface ContextStateActions {
