@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { FieldProps } from 'formik';
 import { TextField } from '@rmwc/textfield';
-import { FormField } from '@rmwc/formfield';
-import { ListItem } from '@rmwc/list';
 
 export interface FormInputState {}
 
@@ -11,7 +9,7 @@ interface TextInputProps extends FieldProps {
     type: 'text' | 'number';
 }
 
-export default class TextInput extends React.PureComponent<TextInputProps, FormInputState> {
+export default class TextInput extends React.Component<TextInputProps, FormInputState> {
     constructor(props: TextInputProps) {
         super(props);
 

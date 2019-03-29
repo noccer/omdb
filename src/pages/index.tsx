@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'gatsby';
+import * as store from 'store2';
 
 import Page from '../components/gatsbyComponents/Page';
 import Container from '../components/gatsbyComponents/Container';
@@ -10,8 +10,13 @@ import { List } from '@rmwc/list';
 
 import MovieList from '../components/MovieList/MovieList';
 import { Search, SearchQuery, SearchFormModel } from '../models/OMDBModels';
-import OMDBService from '../utils/OMDBService';
+import OMDBService, { apiUrl } from '../utils/OMDBService';
 import SearchForm from '../components/Form/SearchForm';
+
+import IndexStyles from './IndexStyles.module.scss';
+import Favourites from '../components/Favourites/Favourites';
+
+const omdbApiKey = 'omdbApiKey';
 
 interface Props {}
 
@@ -63,33 +68,24 @@ class IndexPage extends React.PureComponent<Props, State> {
 
     private renderApp() {
         return (
-            // <Grid fixedColumnWidth={true}>
-            //     <GridInner>
-            //         <GridCell span={6}>
             <List>
-                <SearchForm onSubmit={this.onSubmit} />
-                {/* // </GridCell> */}
-                {/* // <GridCell span={6}> */}
+                <div className={IndexStyles.searchFavourites}>
+                    <SearchForm onSubmit={this.onSubmit} />
+                    <Favourites />
+                </div>
                 <MovieList results={this.state.results} />
             </List>
-            //         </GridCell>
-            //     </GridInner>
-            // </Grid>
         );
     }
 
     private renderPlaceholder() {
         return (
-            // <Grid>
-            //     <GridCell span={12}>
             <>
                 <div>No API Key Found</div>
                 <Button raised={true} onClick={this.onOpenModal}>
                     Enter API Key
                 </Button>
             </>
-            //     </GridCell>
-            // </Grid>
         );
     }
 
@@ -101,6 +97,7 @@ class IndexPage extends React.PureComponent<Props, State> {
                 const searchQueries: SearchQuery = {
                     ...formValues,
                     apiKey,
+                    apiUrl,
                 };
                 const data = await OMDBService.search(searchQueries);
                 this.setState({ results: data.Search });
@@ -113,12 +110,15 @@ class IndexPage extends React.PureComponent<Props, State> {
     }
 
     private getApikeyFromLocalStorage(): string | undefined {
+        if (store.has(omdbApiKey)) {
+            return store.get(omdbApiKey);
+        }
         return;
-        // return '12345';
     }
 
     private onUpdateApiKey(apiKey?: string) {
         this.setState({ apiKey, apiModalOpen: false });
+        store.set(omdbApiKey, apiKey);
     }
 
     private onOpenModal() {
