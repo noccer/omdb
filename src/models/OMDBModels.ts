@@ -21,6 +21,7 @@ export enum ResponseType {
 export type SearchQuery = SearchFormModel & BaseQuery;
 interface BaseQuery {
     apiKey: string;
+    apiUrl: string;
 }
 export interface SearchFormModel {
     /** Movie title to search for. */
