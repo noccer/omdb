@@ -1,7 +1,8 @@
 import Axios, { AxiosRequestConfig } from 'axios';
 import { SearchQuery, PlotType, SearchResult } from '../models/OMDBModels';
 
-const baseUrl = 'http://www.omdbapi.com';
+const baseUrl = 'http://localhost:8001';
+export const apiUrl = 'http://www.omdbapi.com';
 
 const page = 1; // TODO
 const plot = PlotType.short;
@@ -23,9 +24,11 @@ class OMDBService {
             y,
             page,
             plot,
+            apiUrl,
         };
         const response = await Axios.get(baseUrl, {
             ...baseConfig,
+            method: 'GET',
             params,
         });
         return response.data;
