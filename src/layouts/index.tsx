@@ -51,7 +51,6 @@ const IndexLayout: React.SFC = ({ children }) => (
                             rel="stylesheet"
                         />
                     </Helmet>
-                    {/* <Header title={data.site.siteMetadata.title} /> */}
                     <AppBar title={data.site.siteMetadata.title} short={true} />
                     <LayoutMain>{children}</LayoutMain>
                 </ContextProvider>

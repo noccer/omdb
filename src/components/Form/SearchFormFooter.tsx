@@ -8,31 +8,14 @@ export interface SearchFormFooterProps {
     formikBag: FormikProps<SearchFormModel>;
 }
 
-export interface SearchFormFooterState {}
-
-export default class SearchFormFooter extends React.PureComponent<
-    SearchFormFooterProps,
-    SearchFormFooterState
-> {
-    constructor(props: SearchFormFooterProps) {
-        super(props);
-
-        this.state = {};
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
+export default class SearchFormFooter extends React.PureComponent<SearchFormFooterProps> {
     public render() {
         return (
             <FormField>
-                <Button onClick={this.handleSubmit} outlined={true}>
+                <Button onClick={this.props.formikBag.handleSubmit} outlined={true}>
                     Search
                 </Button>
             </FormField>
         );
-    }
-
-    private handleSubmit() {
-        this.props.formikBag.handleSubmit();
     }
 }

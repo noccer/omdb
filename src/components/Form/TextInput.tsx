@@ -2,18 +2,17 @@ import * as React from 'react';
 import { FieldProps } from 'formik';
 import { TextField } from '@rmwc/textfield';
 
-export interface FormInputState {}
-
 interface TextInputProps extends FieldProps {
     placeholder: string;
     type: 'text' | 'number';
+    onSubmit: () => void;
 }
 
-export default class TextInput extends React.Component<TextInputProps, FormInputState> {
+export default class TextInput extends React.PureComponent<TextInputProps> {
     constructor(props: TextInputProps) {
         super(props);
 
-        this.state = {};
+        this.onKeyDown = this.onKeyDown.bind(this);
     }
 
     public render() {
@@ -27,7 +26,14 @@ export default class TextInput extends React.Component<TextInputProps, FormInput
                 type={type}
                 invalid={!!invalid}
                 label={errors[field.name] || placeholder}
+                onKeyDown={this.onKeyDown}
             />
         );
+    }
+
+    private onKeyDown(event: React.KeyboardEvent) {
+        if (event.keyCode === 13 || event.key === 'Enter') {
+            this.props.onSubmit();
+        }
     }
 }

@@ -4,57 +4,55 @@ import {
     TopAppBar,
     TopAppBarRow,
     TopAppBarSection,
-    TopAppBarNavigationIcon,
-    TopAppBarActionItem,
     TopAppBarTitle,
     TopAppBarFixedAdjust,
+    TopAppBarActionItem,
 } from '@rmwc/top-app-bar';
+import { Context, ContextStateActions } from '../../context/AppContext';
 
 export interface AppBarProps {
     title: string;
     short?: boolean;
+    fixed?: boolean;
 }
 
-export interface AppBarState {}
-
-export default class AppBar extends React.PureComponent<AppBarProps, AppBarState> {
+export default class AppBar extends React.PureComponent<AppBarProps> {
     constructor(props: AppBarProps) {
         super(props);
 
-        this.state = {};
+        this.onChangeApiKey = this.onChangeApiKey.bind(this);
     }
 
     public render() {
-        const { short, title } = this.props;
+        const { short, title, fixed } = this.props;
         return (
             <>
-                <TopAppBar short={short}>
+                <TopAppBar short={short} fixed={fixed}>
                     <TopAppBarRow>
                         <TopAppBarSection alignStart>
-                            {/* <TopAppBarNavigationIcon icon="menu" /> */}
                             <TopAppBarTitle>{title}</TopAppBarTitle>
                         </TopAppBarSection>
-                        {/* <TopAppBarSection alignEnd>
-                            <TopAppBarActionItem
-                                aria-label="Download"
-                                alt="Download"
-                                icon="file_download"
-                            />
-                            <TopAppBarActionItem
-                                aria-label="Print this page"
-                                alt="Print this page"
-                                icon="print"
-                            />
-                            <TopAppBarActionItem
-                                aria-label="Bookmark this page"
-                                alt="Bookmark this page"
-                                icon="bookmark"
-                            />
-                        </TopAppBarSection> */}
+                        <TopAppBarSection alignEnd>
+                            <Context.Consumer>
+                                {(context: any) => (
+                                    <TopAppBarActionItem
+                                        aria-label="Change API Key"
+                                        alt="Change API key"
+                                        icon="vpn_key"
+                                        title="Change API key"
+                                        onClick={() => this.onChangeApiKey(context)}
+                                    />
+                                )}
+                            </Context.Consumer>
+                        </TopAppBarSection>
                     </TopAppBarRow>
                 </TopAppBar>
                 <TopAppBarFixedAdjust short={short} />
             </>
         );
+    }
+
+    private onChangeApiKey(context: ContextStateActions) {
+        context.actions.onClearApiKey();
     }
 }

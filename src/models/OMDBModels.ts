@@ -47,7 +47,7 @@ export interface SearchResult {
 export interface Search {
     Title: string;
     Year: string;
-    ImdbId: string;
+    imdbID: string;
     Type: string;
     Poster: string;
 }

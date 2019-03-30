@@ -4,15 +4,9 @@ import { SearchQuery, PlotType, SearchResult } from '../models/OMDBModels';
 const baseUrl = 'http://localhost:8001';
 export const apiUrl = 'http://www.omdbapi.com';
 
-const page = 1; // TODO
 const plot = PlotType.short;
 
-const baseConfig: AxiosRequestConfig = {
-    headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-    },
-};
+const baseConfig: AxiosRequestConfig = {};
 
 class OMDBService {
     public static async search(queries: SearchQuery): Promise<SearchResult> {
@@ -22,7 +16,6 @@ class OMDBService {
             s,
             t,
             y,
-            page,
             plot,
             apiUrl,
         };

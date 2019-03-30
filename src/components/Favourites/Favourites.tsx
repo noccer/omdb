@@ -11,12 +11,11 @@ import {
     DataTableBody,
     DataTableCell,
 } from '@rmwc/data-table';
+import '@rmwc/data-table/data-table.css';
 
 export interface FavouritesProps {}
 
-export interface FavouritesState {}
-
-export default class Favourites extends React.Component<FavouritesProps, FavouritesState> {
+export default class Favourites extends React.PureComponent<FavouritesProps> {
     constructor(props: FavouritesProps) {
         super(props);
 
@@ -40,7 +39,11 @@ export default class Favourites extends React.Component<FavouritesProps, Favouri
                     <DataTableHead>
                         <DataTableRow>
                             <DataTableHeadCell>My Favourites</DataTableHeadCell>
-                            <DataTableHeadCell onClick={context.actions.onClearAllFavourites}>
+                            <DataTableHeadCell />
+                            <DataTableHeadCell
+                                onClick={context.actions.onClearAllFavourites}
+                                style={{ cursor: 'pointer' }}
+                            >
                                 Clear all
                             </DataTableHeadCell>
                         </DataTableRow>
@@ -53,7 +56,7 @@ export default class Favourites extends React.Component<FavouritesProps, Favouri
 
     private renderTableBody(context: ContextStateActions) {
         return (
-            <React.Fragment>
+            <>
                 {context.state.favourites.map((aFavourite, index) => {
                     return (
                         <Favourite
@@ -63,7 +66,7 @@ export default class Favourites extends React.Component<FavouritesProps, Favouri
                         />
                     );
                 })}
-            </React.Fragment>
+            </>
         );
     }
 

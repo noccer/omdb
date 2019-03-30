@@ -1,6 +1,6 @@
 import * as React from 'react';
 import sortBy from 'lodash.sortby';
-import { Search, SearchResult } from '../../models/OMDBModels';
+import { Search, SearchResult, ResponseType } from '../../models/OMDBModels';
 import {
     Card,
     CardPrimaryAction,
@@ -13,13 +13,12 @@ import {
 } from '@rmwc/card';
 import { Typography } from '@rmwc/typography';
 import { GridList } from '@rmwc/grid-list';
+import { Icon } from '@rmwc/icon';
 
 import MoveListStyles from './MovieList.module.scss';
 import { Context, ContextStateActions } from '../../context/AppContext';
 
-export interface MovieListProps {
-    results: Search[];
-}
+export interface MovieListProps {}
 
 export default class MovieList extends React.PureComponent<MovieListProps> {
     constructor(props: MovieListProps) {
@@ -30,35 +29,44 @@ export default class MovieList extends React.PureComponent<MovieListProps> {
 
     public render() {
         return (
-            <GridList
-                tileGutter1={false}
-                // headerCaption={this.state.headerCaption}
-                // twolineCaption={this.state.twolineCaption}
-                // withIconAlignStart={this.state.withIconAlignStart}
-                // tileAspect={this.state.tileAspect}
-            >
-                <Context.Consumer>{(context: any) => this.renderCards(context)}</Context.Consumer>
+            <GridList tileGutter1={false}>
+                <Context.Consumer>
+                    {(context: any) => {
+                        if ((context as ContextStateActions).state.response === ResponseType.true) {
+                            return this.renderCards(context);
+                        }
+                        return this.renderPlaceHolder();
+                    }}
+                </Context.Consumer>
             </GridList>
         );
     }
 
+    private renderPlaceHolder() {
+        return <div className={MoveListStyles.card}>No results found, try again.</div>;
+    }
+
     private renderCards(context: ContextStateActions) {
-        const { results } = this.props;
         const { onAddFavourite } = context.actions;
+        const { favourites, results } = context.state;
         const sortedResults = sortBy(results, (aResult: Search) => aResult.Year);
 
         return (
-            <React.Fragment>
+            <>
                 {sortedResults.map((aResult, index) => {
-                    const { ImdbId, Poster, Type, Year, Title } = aResult;
+                    const { imdbID, Poster, Type, Year, Title } = aResult;
                     const style: React.CSSProperties = {
                         backgroundImage:
                             Poster === 'N/A'
                                 ? 'https://via.placeholder.com/336x189.png?text=No+Image'
                                 : `url(${Poster})`,
                     };
+                    const icon = favourites.some((aFavourite) => aFavourite.imdbID === imdbID)
+                        ? 'star'
+                        : 'star_border';
+
                     return (
-                        <div key={`${ImdbId}-${index}`} className={MoveListStyles.card}>
+                        <div key={`${imdbID}-${index}`} className={MoveListStyles.card}>
                             <Card style={{ width: '21rem' }}>
                                 <CardPrimaryAction>
                                     <CardMedia sixteenByNine style={style} />
@@ -82,20 +90,17 @@ export default class MovieList extends React.PureComponent<MovieListProps> {
                                         <CardActionButton>Bookmark</CardActionButton>
                                     </CardActionButtons>
                                     <CardActionIcons>
-                                        <div
-                                            // onIcon="favorite"
-                                            // icon="favorite_border"
+                                        <Icon
+                                            icon={{ icon, strategy: 'ligature' }}
                                             onClick={() => onAddFavourite(aResult)}
-                                        >
-                                            icon
-                                        </div>
+                                        />
                                     </CardActionIcons>
                                 </CardActions>
                             </Card>
                         </div>
                     );
                 })}
-            </React.Fragment>
+            </>
         );
     }
 }
