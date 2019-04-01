@@ -1,50 +1,51 @@
-# gatsby-starter-typescript-plus
+# OMDB - React - Typescript - Gatsby - rmwc component library
 
-> A starter kit for TypeScript-based Gatsby projects with sensible defaults.
-
-This is a starter kit for [Gatsby.js](https://www.gatsbyjs.org/) websites written in TypeScript. It includes the bare essentials for you to get started (styling, Markdown parsing, minimal toolset).
+A simple website that queries the [OMDB](http://www.omdbapi.com/) movie database api. Site allows you to search for movies, as well as mark your favourite movies.
 
 ## Features
 
-- TypeScript
-- TSLint (with custom TSLint rules)
-- Markdown rendering with Remark
-- Basic component structure
-- Styling with [emotion](https://emotion.sh/)
+- Search
+- API key in LocalStorage
+- Favourites saved in LocalStorage
 
-## Geting started
+## Notable Tech/features used
 
-Install this starter (assuming you have `gatsby-cli` installed) by running the following command:
+- React
+- Typescript
+- [Gatsby](https://www.gatsbyjs.org/)
+- [gatsby-starter-typescript-plus](https://www.gatsbyjs.org/starters/resir014/gatsby-starter-typescript-plus/) - handy starter to get you going with Gatsby & React
+- [React Context](https://reactjs.org/docs/context.html) - useful as a central data and actions store
+- A small [Express.js](https://expressjs.com/) server to get around CORS. See instructions below for running this project
+- [RMWC](https://jamesmfriedman.github.io/rmwc/) component library which wraps Google's [Material Web Components](https://github.com/material-components/material-components-web)
 
-```bash
-gatsby new project-name https://github.com/resir014/gatsby-starter-typescript-plus
+## Future improvements
+- Better, custom styling instead of using library for components
+- Remove a lot of the boilerplate that arrives in with gatsby-starter-typescript-plus
+
+## Prerequisites
+
+- Node 8+
+- Npm 6.4.1+
+- Modern browser that supports `LocalStorage`
+
+## Instructions
+
+Due to CORS limitations, this project needs a backend NodeJS server to work. This has been build into a single script to make use easy
+
+
+Installation:
 ```
-
-## Developing
-
-A nodejs >= 6.0.0 setup with [yarn](https://yarnpkg.com/) is recommended.
-
-```bash
-# install dependencies
-yarn
-
-# ...or, for npm
+git clone git@github.com:noccer/omdb.git
+cd omdb
 npm install
-
-# serve with hot reload at localhost:8000
-npm start
-
-# build for production
-npm run build
-
-# build for production and push to gh-pages branch
-npm run deploy
 ```
 
-## Credits
+Run in dev mode: (served on port 8000)
+```
+npm run start
+```
 
-Built with [Gatsby](https://www.gatsbyjs.org/) - the blazing-fast static site generator for [React](https://facebook.github.io/react/).
-
-## Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/resir014/gatsby-starter-typescript-plus)
+Run in production mode: (builds the site static data files first, then serves it on port 9000)
+```
+npm run start-prod
+```

@@ -34,6 +34,6 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
     private onKeyDown(event: React.KeyboardEvent) {
         if (event.keyCode === 13 || event.key === 'Enter') {
             this.props.onSubmit();
-        }
+        }   
     }
 }
